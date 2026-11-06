@@ -1,0 +1,9 @@
+{
+  "name": "ai-voice-app-creator",
+  "version": "1.0.0",
+  "description": "Voice Controlled AI App Creator with Real Voice and Fallback API",
+  "main": "api/generate.js",
+  "dependencies": {
+    "node-fetch": "^2.7.0"
+  }
+}
