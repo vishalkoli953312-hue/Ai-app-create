@@ -3,44 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Voice App Creator Hub</title>
+    <title>AI Master App Creator & Voice Control Hub</title>
     <style>
         body { font-family: Arial, sans-serif; background: #0b0f19; color: #f8fafc; padding: 20px; margin: 0; }
-        .container { max-width: 800px; margin: auto; background: #1e293b; padding: 25px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); position: relative; }
+        .container { max-width: 900px; margin: auto; background: #1e293b; padding: 25px; border-radius: 12px; position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
         h2 { color: #38bdf8; margin-top: 0; }
-        button { background: #6366f1; color: white; border: none; padding: 12px 24px; cursor: pointer; border-radius: 6px; font-size: 16px; font-weight: bold; transition: 0.2s; }
+        button { background: #6366f1; color: white; border: none; padding: 14px 28px; cursor: pointer; border-radius: 8px; font-size: 18px; font-weight: bold; transition: 0.2s; }
         button:hover { background: #4f46e5; }
-        .settings-btn { position: absolute; top: 25px; right: 25px; background: #334155; padding: 8px 12px; font-size: 18px; border-radius: 8px; cursor: pointer; border: none; color: #fff; }
-        .settings-btn:hover { background: #475569; }
-        
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); justify-content: center; align-items: center; }
-        .modal-content { background: #1e293b; padding: 30px; border-radius: 12px; width: 90%; max-width: 500px; border: 1px solid #334155; }
-        .modal-content textarea { width: 100%; padding: 10px; margin-top: 10px; background: #0f172a; border: 1px solid #334155; color: #fff; border-radius: 6px; box-sizing: border-box; }
-        .close-btn { background: #ef4444; margin-top: 15px; width: 100%; }
-        
-        #status { margin-top: 15px; font-weight: bold; color: #fbbf24; }
-        pre { background: #0f172a; padding: 15px; border-radius: 6px; overflow-x: auto; color: #34d399; font-size: 14px; max-height: 400px; }
+        .settings-btn { position: absolute; top: 25px; right: 25px; background: #334155; padding: 10px 16px; font-size: 18px; border-radius: 8px; cursor: pointer; border: none; color: #fff; }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); justify-content: center; align-items: center; z-index: 1000; }
+        .modal-content { background: #1e293b; padding: 30px; border-radius: 12px; width: 90%; max-width: 550px; border: 1px solid #334155; max-height: 90vh; overflow-y: auto; }
+        .modal-content textarea, .modal-content input { width: 100%; padding: 12px; margin-top: 8px; background: #0f172a; border: 1px solid #334155; color: #fff; border-radius: 6px; box-sizing: border-box; }
+        .checkbox-group { margin-top: 10px; display: flex; flex-direction: column; gap: 8px; background: #0f172a; padding: 12px; border-radius: 6px; border: 1px solid #334155; }
+        .checkbox-group label { display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 15px; }
+        #status { margin-top: 15px; font-weight: bold; color: #fbbf24; font-size: 16px; }
+        .preview-box { margin-top: 20px; background: #0f172a; padding: 15px; border-radius: 8px; border: 1px solid #334155; }
+        iframe { width: 100%; height: 350px; background: #fff; border: none; border-radius: 6px; margin-top: 10px; }
+        pre { background: #0f172a; padding: 15px; border-radius: 6px; overflow-x: auto; color: #34d399; font-size: 13px; max-height: 250px; }
     </style>
 </head>
 <body>
     <div class="container">
         <button class="settings-btn" onclick="toggleSettings(true)">⚙️ Settings</button>
         
-        <h2>🎤 AI Voice App Creator & Real Voice Model</h2>
-        <p>Button dabayein aur bolkar apna app ya feature banwayein:</p>
-        <button onclick="startListening()">Bolna Shuru Karein</button>
-        <p id="status">Sthiti: Taiyar hai</p>
-        <h3>Generated Code:</h3>
-        <pre id="output">Yahan code dikhayi dega...</pre>
+        <h2>🎛️ AI Master App Creator & Voice Control Hub</h2>
+        <p>बटन दबाएं और बोलकर पूरा ऐप जनरेट करवाएं (ऑटोमैटिक मॉडल स्विचिंग और क्लाउड बैकअप सक्रिय):</p>
+        <button onclick="startListening()">🎤 Bolna Shuru Karein</button>
+        <p id="status">स्थिति: तैयार है...</p>
+
+        <div class="preview-box">
+            <h3>📱 Live App Preview:</h3>
+            <iframe id="livePreview"></iframe>
+        </div>
+
+        <h3>Generated Code Output:</h3>
+        <pre id="output">यहाँ ऐप का कोड दिखाई देगा...</pre>
     </div>
 
     <div id="settingsModal" class="modal">
         <div class="modal-content">
-            <h3>🔑 Gemini API Keys Settings</h3>
-            <p style="font-size: 13px; color: #94a3b8;">Apni multiple API keys comma (,) lagakar dalein taaki error aane par auto switch ho sake:</p>
-            <textarea id="apiKeysInput" rows="4" placeholder="AIzaSy..., AIzaSy..."></textarea>
-            <button onclick="saveSettings()" style="margin-top: 15px; width: 100%; background: #10b981;">Save Karein</button>
-            <button class="close-btn" onclick="toggleSettings(false)">Band Karein</button>
+            <h3>🔑 API Keys, Models & Cloudinary Settings</h3>
+            
+            <label>Gemini API Keys (Comma separated):</label>
+            <textarea id="apiKeysInput" rows="3" placeholder="AIzaSyKey1..., AIzaSyKey2..."></textarea>
+            
+            <label style="display:block; margin-top:15px;">Gemini Models Select Karein (ऑटो-स्विच के लिए):</label>
+            <div class="checkbox-group">
+                <label><input type="checkbox" name="modelOption" value="gemini-1.5-flash" checked> gemini-1.5-flash</label>
+                <label><input type="checkbox" name="modelOption" value="gemini-1.5-pro" checked> gemini-1.5-pro</label>
+                <label><input type="checkbox" name="modelOption" value="gemini-1.5-flash-8b"> gemini-1.5-flash-8b</label>
+            </div>
+
+            <label style="display:block; margin-top:15px;">Cloudinary Config (Cloud Name / Preset for Chat Backup):</label>
+            <input type="text" id="cloudinaryInput" placeholder="Cloudinary cloud name or upload preset">
+            
+            <button onclick="saveSettings()" style="margin-top: 20px; width: 100%; background: #10b981;">Save Karein</button>
+            <button onclick="toggleSettings(false)" style="margin-top: 10px; width: 100%; background: #ef4444;">Band Karein</button>
         </div>
     </div>
 
@@ -48,10 +66,13 @@
         let memory = [];
 
         window.onload = function() {
-            const savedKeys = localStorage.getItem('gemini_api_keys');
-            if(savedKeys) {
-                document.getElementById('apiKeysInput').value = savedKeys;
-            }
+            if(localStorage.getItem('gemini_api_keys')) document.getElementById('apiKeysInput').value = localStorage.getItem('gemini_api_keys');
+            if(localStorage.getItem('cloudinary_config')) document.getElementById('cloudinaryInput').value = localStorage.getItem('cloudinary_config');
+            
+            const savedModels = JSON.parse(localStorage.getItem('selected_models') || '["gemini-1.5-flash", "gemini-1.5-pro"]');
+            document.querySelectorAll('input[name="modelOption"]').forEach(cb => {
+                cb.checked = savedModels.includes(cb.value);
+            });
         };
 
         function toggleSettings(show) {
@@ -60,42 +81,54 @@
 
         function saveSettings() {
             const keys = document.getElementById('apiKeysInput').value;
+            const cloudinary = document.getElementById('cloudinaryInput').value;
+            
+            const selectedModels = [];
+            document.querySelectorAll('input[name="modelOption"]:checked').forEach(cb => {
+                selectedModels.push(cb.value);
+            });
+
             localStorage.setItem('gemini_api_keys', keys);
-            speakText("Settings safalpurvak save ho gayi hain.");
+            localStorage.setItem('cloudinary_config', cloudinary);
+            localStorage.setItem('selected_models', JSON.stringify(selectedModels));
+
+            speakText("सेटिंग्स सफलता पूर्वक सेव हो गई हैं।");
             toggleSettings(false);
         }
 
-        // Real Voice Output (Text to Speech)
         function speakText(text) {
             if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
                 const utterance = new SpeechSynthesisUtterance(text);
-                utterance.lang = 'hi-IN'; // Hindi voice support
+                utterance.lang = 'hi-IN';
                 window.speechSynthesis.speak(utterance);
             }
         }
 
-        // Real Voice Input (Speech Recognition)
         function startListening() {
             const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
             if (!SpeechRecognition) {
-                alert("Aapka browser voice recognition support nahi karta hai.");
+                alert("आपका ब्राउज़र वॉइस रिकग्निशन सपोर्ट नहीं करता है।");
                 return;
             }
 
             const rawKeys = localStorage.getItem('gemini_api_keys') || '';
+            const modelsArray = JSON.parse(localStorage.getItem('selected_models') || '["gemini-1.5-flash", "gemini-1.5-pro"]');
             const apiKeysArray = rawKeys.split(',').map(k => k.trim()).filter(k => k.length > 0);
+            const cloudinaryConfig = localStorage.getItem('cloudinary_config') || '';
 
             const recognition = new SpeechRecognition();
             recognition.lang = 'hi-IN';
             
             recognition.onstart = () => { 
-                document.getElementById('status').innerText = "Sun rahe hain... boliye!"; 
+                document.getElementById('status').innerText = "सुन रहे हैं... बोलिए!"; 
+                speakText("सुन रहे हैं, बोलिए।");
             };
 
             recognition.onresult = async (event) => {
                 const command = event.results[0][0].transcript;
-                document.getElementById('status').innerText = `Command mila: "${command}". Code ban raha hai...`;
-                speakText("Command mil gaya hai, code taiyar ho raha hai.");
+                document.getElementById('status').innerText = `कमांड मिला: "${command}". ऐप जनरेट हो रहा है...`;
+                speakText("कमांड मिल गया है, ऐप तैयार हो रहा है।");
                 
                 try {
                     const res = await fetch('/api/generate', {
@@ -104,7 +137,9 @@
                         body: JSON.stringify({ 
                             command, 
                             contextMemory: memory,
-                            apiKeys: apiKeysArray 
+                            apiKeys: apiKeysArray,
+                            models: modelsArray,
+                            cloudinaryConfig
                         })
                     });
                     
@@ -112,11 +147,25 @@
                     if(data.success) {
                         document.getElementById('output').innerText = JSON.stringify(data.code, null, 2);
                         memory.push({ command, response: data.code });
-                        document.getElementById('status').innerText = "Safalpurvak code taiyar ho gaya!";
-                        speakText("Aapka application code safalpurvak taiyar ho gaya hai.");
+                        
+                        // लाइव प्रीव्यू अपडेट करें
+                        const codeObj = data.code;
+                        let fullHtml = codeObj['index.html'] || '';
+                        if (codeObj['style.css']) {
+                            fullHtml = fullHtml.replace('</head>', `<style>${codeObj['style.css']}</style></head>`);
+                        }
+                        if (codeObj['script.js']) {
+                            fullHtml = fullHtml.replace('</body>', `<script>${codeObj['script.js']}<\/script></body>`);
+                        }
+                        
+                        const iframe = document.getElementById('livePreview');
+                        iframe.srcdoc = fullHtml;
+
+                        document.getElementById('status').innerText = "सफलतापूर्वक ऐप बन गया और लाइव हो गया!";
+                        speakText("आपका ऐप सफलतापूर्वक बन गया है और लाइव प्रीव्यू में दिख रहा है।");
                     } else {
                         document.getElementById('status').innerText = "Error: " + data.error;
-                        speakText("Error aa gaya hai, kripya apni API key check karein.");
+                        speakText("त्रुटि आ गई है, कृपया सेटिंग्स और मॉडल जांचें।");
                     }
                 } catch (err) {
                     document.getElementById('status').innerText = "Connection Error: " + err.message;
